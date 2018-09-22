@@ -24,10 +24,15 @@ from keras.layers import Dense
 model_cnn_classifier = Sequential()
 
 #Convolutional 
-model_cnn_classifier.add(Conv2D(32,3,3,  input_shape = (28,28,1), activation= 'relu'))
+model_cnn_classifier.add(Conv2D(32,3,3,  input_shape = (28,28,3), activation= 'relu'))
 
 # Phase - 2 : Pooling
 model_cnn_classifier.add(MaxPooling2D(pool_size = (2,2)))
+
+
+# Adding a second convolutional layer
+model_cnn_classifier.add(Conv2D(32, (3, 3), activation = 'relu'))
+model_cnn_classifier.add(MaxPooling2D(pool_size = (2, 2)))
 
 
 
@@ -63,17 +68,18 @@ train_datagen = ImageDataGenerator(
 #Test Daragen
 test_datagen = ImageDataGenerator(rescale=1./255)
 
+
 #Training Set
 training_set= train_datagen.flow_from_directory(
         'notMNIST_large',
-        target_size = (64, 64),
+        target_size = (28, 28),
         batch_size = 32,
         class_mode='binary')
 
 #test Set
 test_set = test_datagen.flow_from_directory(
         'notMNIST_small',
-        target_size = (64,64),
+        target_size = (28,28),
         batch_size = 32,
         class_mode='binary')
 
@@ -81,10 +87,10 @@ test_set = test_datagen.flow_from_directory(
 #Fitting data
 #Training Our model by fitting the data
 model_cnn_classifier.fit_generator(training_set,
-                         steps_per_epoch = 8000,
-                         epochs = 25,
+                         steps_per_epoch = 529119,
+                         epochs = 1,
                          validation_data = test_set,
-                         validation_steps = 2000)
+                         validation_steps = 18726)
 
 
 # testing classifier
