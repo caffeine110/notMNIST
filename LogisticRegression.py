@@ -44,16 +44,16 @@ logisticRegr = LogisticRegression()
 
 
 #fitting data to the classifer
-logisticRegr.fit(train_dataset, train_labels)
+logisticRegr.fit(train_dataset, train_labels, sample_weight=None)
 
 
 ## Phase - 4  Predicting phase
 # Returns a NumPy Array
 # Predict for One image
-logisticRegr.predict(test_dataset[0].reshape(1,-1))
+#logisticRegr.predict(test_dataset[0].reshape(1,-1))
 
 #### Predict for Multiple images at Once
-logisticRegr.predict(test_dataset[0:10])
+#ogisticRegr.predict(test_dataset[0:10])
 
 # Make predictions on entire test data
 predictions = logisticRegr.predict(test_dataset)
